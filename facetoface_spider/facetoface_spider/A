@@ -1,0 +1,107 @@
+        hxs = Selector(response)
+        #CODE for scaping card names
+        card_names = hxs.xpath('//*[@class="name"]/text()')
+        card_prices = hxs.xpath('//*[@class="price"]/text()')
+        card_variants = hxs.xpath('//*[@class="variantInfo"]/text()')
+        #get the card elements (td) loop over them, in here get the list of the price elements related to the specific card 
+        card_category = response.request.url
+        data = {}
+        if "magic_singles" in card_category:
+            for names, prices, variants in zip(card_names, card_prices, card_variants):
+                data = FacetoFaceSpiderItem()
+                data["card"] = [names,prices, variants, card_category]
+                yield data
+
+
+        #card_info=dict(zip(names,zip(condition,prices)))
+        #card_info={names[i]:[category,condition[i],prices[i]] for i in range(len(names)-1)}
+
+        #condition=hxs.xpath('.//table[@class="invisible-table products_table"]/tr[*]/td[2]/table/tr[1]/td[1]/text()').extract()
+
+        #//*[@id="content"]/table #product table
+        #   //*[@id="product_11578"] #individual products
+        #       //*[@id="product_11578"]/td[1] #skip
+        #       //*[@id="product_11578"]/td[2] #all card info
+        #           //*[@id="product_11578"]/td[2]/a #card name 
+        #           //*[@id="variant_331290"]/td[1] #card category
+        #           //*[@id="variant_331290"]/td[2] #card price
+        #card_prices = hxs.xpath('//*[@class="price"]/text()')
+        #card_variants = hxs.xpath('//*[@class="variantInfo"]/text()')
+        #url = response.request.url
+        #card_table = hxs.xpath('.//table[@class="invisible-table products_table"]')
+        #card_table2 = hxs.xpath('//*[@id="product_11578"]/td[2]/table')
+
+        #count=1
+        #for cat in categories_url:
+            #print(count, cat)
+            #print("-------------------------------------------------next--------------------------------------")
+            #count+=1
+
+        for rows in card_info_table.xpath('.//*[@class="variantRow"]'):
+            print("Rows:    ")
+            print(rows.extract())
+            for info, prices in zip(card_variants, card_prices):
+                print("Info:   ")
+                print(info)
+                print("Prices:    ")
+                print(prices)
+
+
+                        for name,price in zip(names,prices):
+            card_info = FacetoFaceSpiderItem()
+            card_info['card']={name:[price.strip(),categories]}
+            yield card_info
+
+
+
+class F2FSpider(scrapy.Spider):
+    name = "face_crawler"
+    allowed_domains = ['facetofacegames.com']
+    start_urls = ["https://www.facetofacegames.com/"]
+    def parse(self, response):
+        hxs = Selector(response)
+        #CODE for scaping card names
+        card_meta = hxs.xpath('//*[@class="meta"]')
+        #card_name = card_meta.xpath('//*[@class="name"]').extract()
+        card_info_table = card_meta.xpath('.//*[@class="invisible-table"]')
+        for rows in card_info_table.xpath('.//*[@class="variantRow"]'):
+            print("ROW: ")
+            print (rows.extract())
+
+C:\Users\Nickolas\Desktop\facetofaceScraper\facetoface_spider\facetoface_spider\spiders>scrapy crawl face_crawler
+
+
+
+
+                        #get the card elements (td) loop over them, in here get the list of the price elements related to the specific card 
+        card_category = response.request.url
+        data = {}
+        if "magic_singles" in card_category:
+            for m in card_meta:
+                print(m)
+
+
+
+
+
+                            for info, prices in zip(card_variants, card_prices):
+                print("Info:   ")
+                print(info)
+                print("Prices:    ")
+                print(prices)
+
+
+
+
+
+
+                        for names in card_names:
+            print("____________name_____________")
+            print(names)
+            for variants, prices in zip(card_info_table.xpath('.//*[@class="variantInfo"]'),card_info_table.xpath('.//*[@class="price"]')):
+                variant = variants.extract()
+                price = prices.extract()
+                print("___________variant___________")
+                print(variant)
+                print("____________price____________")
+                print(price)
