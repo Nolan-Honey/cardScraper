@@ -37,7 +37,7 @@ class F2FSpider(scrapy.Spider):
         links = hxs.xpath('//a/@href').extract()
         link_validator= re.compile("^(?:http:\/\/www\.facetofacegames\.com\/catalog\/magic_singles|https:\/\/www\.facetofacegames\.com\/catalog\/magic_singles)(?:[\w#!:\.\?\+=&amp;%@!\-\/\(\)]+)|\?(?:[\w#!:\.\?\+=&amp;%@!\-\/\(\)]+)$")
         for link in links:
-            if "wcd_blank_cards/6313" in link and "filter" not in link:
+            if "magic_singles" in link and "filter" not in link:
                 #print("TRUE:--------------------------- " + set + " ---------------------------:TRUE")
                 if link_validator.match(link) and not link in visited_links:
                     visited_links.append(link)
