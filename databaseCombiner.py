@@ -22,7 +22,7 @@ imageData = pd.DataFrame(list(imageCollection.find()))
 #check to make sure the collections loaded properly
 print(imageData.head())
 print(priceData.head())
-print("---------We got to the end of the file--------------")
+
 
 #convert everything to lowercase
 priceData['category'] = priceData.loc[:,'category'].str.lower()
@@ -37,13 +37,14 @@ imageData['price'] = np.nan
 priceData['foil'] = np.nan
 
 #populate foil column and remove it from Name
-if priceData['card'].str.contains('- foil') == True:
-    priceData['card'] = priceData['card'].str.replace('- foil', '').str.replace('- foil', '')
-    priceData['Foil'] = True
+for index, row in priceData.iterrows():
+    if row['card'].contains('- foil').any():
+        row['card'] = row['card'].str.replace('- foil', '').str.replace('- foil', '')
+        row['Foil'] = True
 
 #priceData.loc['card'].str.contains('- foil').iloc[5] = True
 
-
+print("---------We got to the data combining part--------------")
 #find each unique set in image DB
 for priceIndex, priceRow in priceData.iterrows():
     for imageIndex, imageRow in imageData.iterrows():
