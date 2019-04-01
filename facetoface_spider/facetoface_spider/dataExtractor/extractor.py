@@ -13,9 +13,9 @@ import requests
 def extract():
     client = pymongo.MongoClient("mongodb://admin:2ez_4arteezy@cluster0-shard-00-00-pbwub.gcp.mongodb.net:27017,cluster0-shard-00-01-pbwub.gcp.mongodb.net:27017,cluster0-shard-00-02-pbwub.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true")
     db = client["the_sword_and_board_online_pricing_db"]
-    collection = db[ "card_prices_with_set_and_names" ]
+    collection = db[ "test_card_prices_with_set_and_names" ]
     serverStatusResult=db.command("serverStatus")
-    pprint(serverStatusResult)
+    print(serverStatusResult)
 
     #insert
     df = pd.read_csv('../spiders/mtgCardPrices.csv')
@@ -30,9 +30,9 @@ def extract():
 def cardsToDb():
     client = pymongo.MongoClient("mongodb://admin:2ez_4arteezy@cluster0-shard-00-00-pbwub.gcp.mongodb.net:27017,cluster0-shard-00-01-pbwub.gcp.mongodb.net:27017,cluster0-shard-00-02-pbwub.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true")
     db = client["the_sword_and_board_online_pricing_db"]
-    collection = db[ "mtg_cards" ]
+    collection = db[ "test_mtg_cards" ]
     serverStatusResult=db.command("serverStatus")
-    pprint(serverStatusResult)
+    print(serverStatusResult)
     #scryfall --> into our DB
     data = requests.get("https://archive.scryfall.com/json/scryfall-default-cards.json")
     print(data.status_code)
