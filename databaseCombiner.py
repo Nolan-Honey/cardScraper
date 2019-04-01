@@ -63,3 +63,4 @@ for priceIndex, priceRow in priceData.iterrows():
                         imageRow['price'] = priceRow['msrp']
 
 print(priceData.head)
+combineCollection.insert_many(imageData)
