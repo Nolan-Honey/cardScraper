@@ -38,9 +38,11 @@ priceData['foil'] = np.nan
 
 #populate foil column and remove it from Name
 for index, row in priceData.iterrows():
-    if row['card'].contains('- foil').any():
-        row['card'] = row['card'].str.replace('- foil', '').str.replace('- foil', '')
-        row['Foil'] = True
+    print("Row: " +row)
+    print("Index: " +index)
+    #if priceData.loc[row, 'card'].str.contains('- foil', na=False).any():
+    #    row['card'] = row['card'].str.replace('- foil', '').str.replace('- foil', '')
+     #   row['Foil'] = True
 
 #priceData.loc['card'].str.contains('- foil').iloc[5] = True
 

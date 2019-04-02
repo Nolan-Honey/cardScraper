@@ -23,7 +23,7 @@ def extract():
     df['category'] = df['category'].str.replace(r'^$', 'battlebond').str.replace(r'^$', 'battlebond')
     df['category'] = df['category'].str.replace(r'^s{1}$', 'italian_legends').str.replace(r'^s{1}$', 'italian_legends')
     df.drop_duplicates(subset='category', keep='first')
-    df.to_csv("mtgPrices", sep='\t', encoding='utf-8')
+    df.to_csv("mtgPrices", sep='\t', encoding='utf-8') 
     data = df.to_dict(orient='records') 
     collection.insert_many(data) 
 
