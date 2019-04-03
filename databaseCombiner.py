@@ -34,12 +34,15 @@ imageData['set_name'] = imageData.loc[:,'set_name'].str.lower()
 imageData['price'] = np.nan
 
 #Add a blank row to PriceData for foil differentiation
-priceData['foil'] = np.nan
+#this needs to be eddited, doesnt actually make the proper things foil.
+for index, row in priceData.iterrows():
+    if row["card"].str.contains("- foil"):
+        priceData['foil'] = np.nan
 
 #populate foil column and remove it from Name
 for index, row in priceData.iterrows():
-    print("Row: " +row)
-    print("Index: " +index)
+    print("Row: " , row)
+    print("Index: ", index)
     #if priceData.loc[row, 'card'].str.contains('- foil', na=False).any():
     #    row['card'] = row['card'].str.replace('- foil', '').str.replace('- foil', '')
      #   row['Foil'] = True
